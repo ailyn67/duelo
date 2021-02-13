@@ -1,0 +1,22 @@
+* {
+  background-color: black;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  margin: auto;
+  font-family: 'Oswald', sans-serif;
+  font-size: 100px;
+}
+.h5 {
+  font-weight: bold;
+  color:goldenrod
+}
+
+img {
+  width: 250px;
+  height: 350px;
+  border-radius: 50px;
+}

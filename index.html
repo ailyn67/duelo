@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Cartas </title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link href="styles.css" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>JUEGO DE CARTAS</h1>
+  <div class="card-group">
+    <div class="card">
+      <img src="imagen/caballo ejemplar.jpg" class="card-img-top" name="horse" alt="caballo ejemplar magic">
+      <div class="card-body">
+        <h5 class="card-title">Caballo Ejemplar</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+          This content is a little bit longer.</p>
+
+      </div>
+    </div>
+    <div class="card">
+      <img src="imagen/black lotus.jpg" class="card-img-top" name="black" alt="black lotus magic">
+      <div class="card-body">
+        <h5 class="card-title">Black Lotus</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    class card {
+      constructor(name, cost) {
+        this.name = name;
+        this.cost = cost;
+      }
+    }
+
+    class unit extends card {
+      constructor(name, cost, power, resilence) {
+        super(name, cost);
+        this.power = power;
+        this.resilence = resilence;
+      }
+      attack(target) {
+        if (!(target instanceof unit)) {
+          console.log('Error! Se está atacando algo que no es de la unidad');
+          return;
+        }
+        target.resilence -= this.power;
+      }
+    }
+
+    class effect extends card {
+      constructor(name, cost, text, stat, magnitude) {
+        super(name, cost);
+        this.text = text;
+        this.stat = stat;
+        this.magnitude = magnitude;
+      }
+      affect(unit) {
+        if (this.stat == 'resilence') {
+          unit.resilence += this.magnitude;
+        } else {
+          unit.power += this.magnitude;
+        }
+      }
+    }
+    
+
+    {
+      const hard_algorithm = new effect('Algorithm Hard', 2, 'aumentar la resistencia del objetivo en 3', 'resilence', 3);
+      // Magic Horse reemplaza a jugador Ninja Rojo
+      console.log('Jugador 1 convoca a Magic Horse');
+      const magic_horse = new unit('Magic Horse', 3, 3, 4);
+
+      const algorithm = new effect('Algorithm Hard', 2, 'aumentar la resistencia del objetivo en 3', 'resilence', 3);
+      algorithm.affect(magic_horse);
+      debugger;
+
+      // Magic Black reemplaza a jugador Ninja Negro
+      console.log('Jugador 2 convoca a "Magic Black"');
+      const magic_black = new unit('Magic Black', 4, 5, 4);
+      debugger;
+
+    console.log('jugador 2 juega "Rechazo de promesa no controlada" en "Magic Horse"');
+    const uncontrolled_promise = new effect('Rechazo de promesa no manejado', 1,'reducir la resistencia del objetivo en 2', 'resilence', -2);
+
+    uncontrolled_promise.affect(magic_horse);
+    debugger;
+
+    console.log('El jugador 1 juega "Programación en pareja" en "Magic Horse"');
+    const partner_programmation = new effect('Programación en pareja', 3,'aumentar el poder del objetivo en 2','power',2);
+    
+    partner_programmation.affect(magic_horse);
+    debugger;
+
+    console.log('"Magic Horse" ataca a "Magic Black"');
+    magic_horse.attack(magic_black);
+    
+    }
+  </script>
+</body>
+</html>
